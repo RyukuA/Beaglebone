@@ -12,6 +12,9 @@ class Pwm {
 public:
 	Pwm();
 	virtual ~Pwm();
+	int SetDuty(unsigned int PWMPin, char* duty, unsigned int PWMSecond, unsigned int Pval);
+	int SetPeriod(unsigned int pin, char* period, unsigned int second, unsigned int pval);
+
 };
 
 #endif /* RASPBERRY_PWM_HPP_ */
