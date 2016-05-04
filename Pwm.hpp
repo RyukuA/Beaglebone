@@ -12,7 +12,7 @@ class Pwm {
 public:
 	Pwm();
 	virtual ~Pwm();
-	int SetDuty(unsigned int PWMPin, char* duty, unsigned int PWMSecond, unsigned int Pval);
+	int SetDuty(unsigned int PWMPin, double duty, unsigned int PWMSecond, unsigned int Pval);
 	int SetPeriod(unsigned int pin, char* period, unsigned int second, unsigned int pval);
 
 };

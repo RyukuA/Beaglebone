@@ -21,10 +21,16 @@ Pwm::~Pwm() {
 	// TODO Auto-generated destructor stub
 }
 
-int Pwm::SetDuty(unsigned int PWMPin, char* duty, unsigned int PWMSecond, unsigned int Pval) {
-	FILE* FileHandle = NULL;
+int Pwm::SetDuty(unsigned int PWMPin, double duty, unsigned int PWMSecond, unsigned int Pval) {
+	//FILE* FileHandle = NULL;
 	char setValue[7], PWMValue[MAX];
-	sprintf(PWMValue, "/sys/devices/ocp.2/pwm_test_P%d_%d.%d/duty", Pval, PWMPin, PWMSecond);
+	sprintf(PWMValue, "/sys/devices/ocp.3/pwm_test_P%d_%d.%d/duty", Pval, PWMPin, PWMSecond);
+	ofstream FileHandle(PWMValue);
+	if(FileHandle.is_open()) {
+		FileHandle << duty;
+		FileHandle.close();
+	}
+	/*
 	if((FileHandle = fopen(PWMValue, "rb+")) == NULL) {
 		cout << "Cannot open duty handle" << endl;
 		return 1;
@@ -32,19 +38,27 @@ int Pwm::SetDuty(unsigned int PWMPin, char* duty, unsigned int PWMSecond, unsign
 	strcpy(setValue, duty);
 	fwrite(&setValue, sizeof(char), 7, FileHandle);
 	fclose(FileHandle);
+	*/
 	return 0;
 }
 int Pwm::SetPeriod(unsigned int pin, char* period, unsigned second, unsigned int pval) {
-	FILE* FileHandle = NULL;
+	//FILE* FileHandle = NULL;
 	char setValue[8], PWMValue[MAX];
-	sprintf(PWMValue, "/sys/devices/ocp.2/pwm_test_P%d_%d.%d/period", pval, pin, second);
+	sprintf(PWMValue, "/sys/devices/ocp.3/pwm_test_P%d_%d.%d/period", pval, pin, second);
+	ofstream FileHandle(PWMValue);
+	if(FileHandle.is_open()) {
+		FileHandle << period;
+		FileHandle.close();
+	}
+	/*
 	if((FileHandle = fopen(PWMValue, "rb+")) == NULL) {
 		cout << "Cannot open duty handle" << endl;
 		return 1;
-	}
-	strcpy(setValue, period);
-	fwrite(&setValue, sizeof(char), 8, FileHandle);
-	fclose(FileHandle);
+	} */
+	cout << "Got past opening the file" << endl; 
+	//strcpy(setValue, period);
+	//fwrite(&setValue, sizeof(char), 8, FileHandle);
+	//fclose(FileHandle);
 	return 0;
 }
 

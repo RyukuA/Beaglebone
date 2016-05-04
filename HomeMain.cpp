@@ -15,11 +15,13 @@
 using namespace std;
 
 int main() {
-	Pwm P9_22;
-	char period[] = "20000000";
+	Pwm P8_19;
+	Pwm P9_14;
+	char period[] = "2000000";
 	//char period[9] = {'2', '0', '0', '0', '0', '0', '0', '0', '\0'};
-
-	P9_22.SetPeriod(0, period);
+	P8_19.SetPeriod(19, period, 12, 8);
+	P9_14.SetPeriod(14, period, 13, 9);
+//	P9_22.SetPeriod(0, period);
 
 	struct sockaddr_in my_addr, cli_addr;
 	string buffer;
@@ -63,7 +65,9 @@ int main() {
 			y = stod((buffer.substr(pos+1, std::string::npos)).c_str(), nullptr);
 			cout << "X: " << abs(x) << "\tY: " << abs(y) << endl;
 		}
-		P9_22.SetDuty(0, abs(x*1000*1000));
+		P8_19.SetDuty(19, abs(x*100000), 12, 8);
+		//usleep(10000);
+		P9_14.SetDuty(14, abs(y*100000), 13, 9);
 
 	}
 	close(sockfd);
